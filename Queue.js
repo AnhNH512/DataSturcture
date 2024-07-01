@@ -11,28 +11,50 @@ class ArrayQueue {
     return this.length;
   }
 
-  access(index) {
+  Access(index) {
     if (index < 0 || index > this.length) {
       return console.log("Index không phù hợp");
     }
     return this.queueArray[index];
   }
 
-  push(data) {
+  Push(data) {
     const newArray = [...this.queueArray, data];
     this.queueArray = newArray;
+    this.length = this.length + 1
   }
 
   Insert(index, data) {
-    if (index < 0 || index > this.length) {
+    console.log(this.length,'this.length');
+    if (index < 0 || index > this.length + 1) {
       return console.log("index out range");
     } else if (index === 0) {
       const current = [...this.queueArray];
       const newArray = [data, ...current];
       this.queueArray = newArray;
-    } else if (index === this.length - 1) {
-      this.push(data);
+      this.length = this.length + 1
+    } else if (index === this.length) {
+        console.log('push',data);
+      this.Push(data);
     } else {
+        console.log('handle here',data);
+        console.log(this.queueArray,'this.queueArray');
+        const currentArray = this.queueArray
+        const newArray = []
+        for (let i = 0; i < currentArray.length; i++) {
+            if(i === index){
+                console.log(i,'i',index,'index',currentArray[i]);
+                newArray[i + 1] = currentArray[i]
+                newArray[i] = data
+                i++
+            }else {
+                newArray[i] = currentArray[i]
+            }
+            
+        }
+        this.length = this.length + 1
+        this.queueArray = newArray
+        console.log(newArray,'newArray');
     }
   }
 
@@ -41,6 +63,7 @@ class ArrayQueue {
     if (this.length) {
       currentArray.splice(this.length - 1, 0, data);
       this.queueArray = currentArray;
+      this.length = this.length + 1
     }
   }
 
@@ -50,6 +73,7 @@ class ArrayQueue {
       currentArray.splice(0, 1);
       this.queueArray = currentArray;
     }
+    this.length = this.length - 1
   }
 
   IsEmpty() {
@@ -67,9 +91,19 @@ class ArrayQueue {
       return;
     }
   }
+  PrintList(){
+    let currentArray = this.queueArray
+    for (let i = 0; i < currentArray.length; i++) {
+        console.log('item>>>',currentArray[i]); 
+    }
+  }
 }
 
 const arrayQueue = new ArrayQueue();
+arrayQueue.Insert(0,123)
+arrayQueue.Insert(0,'llll')
+arrayQueue.Insert(1,1231231223321)
+arrayQueue.PrintList()
 
 // Implementation Linked List
 
