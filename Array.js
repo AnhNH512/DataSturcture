@@ -105,8 +105,9 @@ class ImpelemtationArray {
 
   PrintList() {
     let currentArray = this.array;
+    console.log(currentArray,'currentArray');
     for (let i = 0; i < currentArray.length; i++) {
-      console.log("item>>>", currentArray[i]);
+      // console.log("item>>>", currentArray[i]);
     }
   }
 }
@@ -117,7 +118,6 @@ array.push("llll");
 // array.Insert(1, 1231231223321);
 array.Update(1, "update 1");
 array.PrintList();
-console.log(ImpelemtationArray, "array");
 module.exports = {
   ImpelemtationArray,
 };

@@ -8,34 +8,97 @@
 const { ImpelemtationArray } = require("./Array");
 const { LinkedList, Node } = require("./LinkedList");
 
-class StackArray extends ImpelemtationArray {
+// class StackArray extends ImpelemtationArray {
+//   constructor() {
+//     super();
+//   }
+
+//   Push(data) {
+//     this.push(data);
+//   }
+
+//   Pop() {
+//     if (this.IsEmpty()) {
+//       return "Underflow";
+//     }
+//     const newArr = [];
+//     const currentArray = this.array;
+//     for (let i = 0; i < this.length - 1; i++) {
+//       newArr.push(currentArray[i]);
+//     }
+//     console.log(newArr,'newArr');
+//     this.array = newArr;
+//     this.length = this.length- 1
+//     return currentArray[this.length - 1];
+//   }
+
+//   Top() {
+//     if (this.IsEmpty()) {
+//       return "Underflow";
+//     }
+//     return this.array[this.length - 1];
+//   }
+// }
+
+// const newStackArray = new StackArray();
+// newStackArray.Push('test')
+// newStackArray.Push('test1')
+// newStackArray.PrintList()
+
+
+
+class StackLinkedList extends LinkedList {
   constructor() {
     super();
   }
-
+  // Thêm data vào cuối linked list.
   Push(data) {
-    this.push(data);
+    const newNode = new Node(data);
+    console.log(newNode, "newNode");
+    let current = this.head;
+    while (current.next) {
+      current = current.next
+    }
+    if(current){
+      current.next = newNode
+      this.tail = newNode
+    }
   }
 
   Pop() {
-    if (this.IsEmpty()) {
-      return "Underflow";
+    if (this.head) {
+      let current = this.head;
+      let prev 
+      while (current.next) {
+        prev = current
+        current = current.next
+      }
+      console.log(prev,'prev',current,'current');
+      if(prev && current){
+        prev.next = null        
+        return current;
+      }
+    } else {
+      return console.log("Hiện tại trong linked list không có phần tử nào");
     }
-    const newArr = [];
-    const currentArray = this.array;
-    for (let i = 0; i < currentArray.length - 2; i++) {
-      newArr.push(currentArray[i]);
-    }
-    this.array = newArr;
-    return currentArray[this.length - 1];
   }
 
-  Top() {
-    if (this.IsEmpty()) {
-      return "Underflow";
+  Peek() {
+    return this.tail;
+  }
+
+  printList() {
+    let current = this.head;
+
+    while (current) {
+      console.log(current, "current");
+      current = current.next;
     }
-    return this.array[this.length];
   }
 }
 
-const newStackArray = new StackArray();
+const stackLinkedList = new StackLinkedList();
+stackLinkedList.addAtHead("1");
+stackLinkedList.addAtHead("2");
+stackLinkedList.Push(3)
+stackLinkedList.printList();
